@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@theme {
+  --color-yaazh-moss: #383b34;
+  --color-yaazh-moss-dark: #23261f;
+  --color-yaazh-moss-light: #4a4d44;
+  --color-yaazh-lime: #a8e063;
+  --color-yaazh-lime-light: #c6f19d;
+  --color-yaazh-emerald: #6d9c44;
+  --color-yaazh-ink: #f2f3ef;
+  --color-yaazh-muted: #a4aaa0;
+  --color-yaazh-card: #282b24;
+
+  --font-lexend: var(--font-lexend), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif: var(--font-noto-serif-tamil), 'Instrument Serif', Georgia, serif;
+}
+
+:root {
+  color-scheme: dark;
+  --background: #383b34;
+  --foreground: #f2f3ef;
+  --card-bg: rgba(40, 43, 36, 0.75);
+  --card-border: rgba(238, 243, 231, 0.12);
+  --lime-accent: #a8e063;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--background);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(64% 52% at 27% 84%, rgba(232,238,222,0.08) 0%, transparent 72%),
+    radial-gradient(70% 60% at 92% 8%, rgba(24,28,20,0.12) 0%, transparent 68%),
+    #383b34;
+  color: var(--foreground);
+  font-family: var(--font-lexend);
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(168, 224, 99, 0.35);
+  color: #ffffff;
+}
+
+.section-shell {
+  width: min(1180px, calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+.section-padding {
+  padding-block: clamp(4.5rem, 9vw, 7.5rem);
+}
+
+.tamil-copy {
+  line-height: 1.85;
+  letter-spacing: 0;
+}
+
+/* Living Green Card Styles */
+.living-card {
+  position: relative;
+  background: rgba(40, 43, 36, 0.78);
+  border: 1px solid rgba(238, 243, 231, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px -10px rgba(10, 12, 8, 0.45), inset 0 1px rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.living-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(168, 224, 99, 0.35);
+  box-shadow: 0 26px 60px -10px rgba(10, 12, 8, 0.6), 0 0 24px rgba(168, 224, 99, 0.15), inset 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.living-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(168, 224, 99, 0.3);
+  background: rgba(168, 224, 99, 0.12);
+  color: #c6f19d;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  box-shadow: 0 0 0 4px rgba(168, 224, 99, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
