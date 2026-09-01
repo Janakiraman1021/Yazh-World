@@ -4,10 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
+import { useI18n } from "../i18n/context";
+import { LanguageSelector } from "./LanguageSelector";
 
 type NavItem = {
   href: string;
-  label: string;
+  labelKey: "navHome" | "navProducts" | "navWhyYaazh" | "navAbout" | "navGetStarted";
   isEnter?: boolean;
   icon: ReactNode;
 };
@@ -15,7 +17,7 @@ type NavItem = {
 const navItems: NavItem[] = [
   {
     href: "/",
-    label: "முகப்பு",
+    labelKey: "navHome",
     icon: (
       <svg viewBox="0 0 16 16" className="size-3.5 fill-none stroke-current stroke-[1.3] stroke-linecap-round stroke-linejoin-round" aria-hidden="true">
         <path d="M8 14V9" />
@@ -26,7 +28,7 @@ const navItems: NavItem[] = [
   },
   {
     href: "/products",
-    label: "தயாரிப்புகள்",
+    labelKey: "navProducts",
     icon: (
       <svg viewBox="0 0 16 16" className="size-3.5 fill-none stroke-current stroke-[1.3] stroke-linecap-round stroke-linejoin-round" aria-hidden="true">
         <path d="M1.6 12.4c2.4-3.4 4.3-5.1 5.7-5.1 2 0 3 3.6 5 3.6 1.1 0 1.9-.5 2.4-1.4" />
@@ -36,7 +38,7 @@ const navItems: NavItem[] = [
   },
   {
     href: "/why-yaazh",
-    label: "ஏன் யாழ்?",
+    labelKey: "navWhyYaazh",
     icon: (
       <svg viewBox="0 0 16 16" className="size-3.5 fill-none stroke-current stroke-[1.3] stroke-linecap-round stroke-linejoin-round" aria-hidden="true">
         <path d="M4 2.4h5.3L12 5.1v8.5H4z" />
@@ -47,7 +49,7 @@ const navItems: NavItem[] = [
   },
   {
     href: "/about",
-    label: "எங்களைப் பற்றி",
+    labelKey: "navAbout",
     icon: (
       <svg viewBox="0 0 16 16" className="size-3.5 fill-none stroke-current stroke-[1.3] stroke-linecap-round stroke-linejoin-round" aria-hidden="true">
         <circle cx="8" cy="8" r="6" />
@@ -57,7 +59,7 @@ const navItems: NavItem[] = [
   },
   {
     href: "/contact",
-    label: "தொடங்கு",
+    labelKey: "navGetStarted",
     isEnter: true,
     icon: (
       <svg viewBox="0 0 16 16" className="size-3.5 fill-none stroke-current stroke-[1.3] stroke-linecap-round stroke-linejoin-round" aria-hidden="true">
@@ -72,22 +74,23 @@ const navItems: NavItem[] = [
 export function Navbar() {
   const pathname = usePathname();
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const { t } = useI18n();
 
   return (
     <div className="fixed top-5 left-0 right-0 z-50 flex justify-center pointer-events-none px-3">
       <nav
-        aria-label="முக்கிய வழிகாட்டல்"
-        className="pointer-events-auto inline-flex items-center gap-1.5 p-1.5 rounded-[18px] border border-white/12 bg-[rgba(34,40,31,0.85)] shadow-[0_12px_32px_rgba(10,14,8,0.45),inset_0_1px_rgba(255,255,255,0.08)] backdrop-blur-xl transition-all duration-300 max-w-full overflow-x-auto no-scrollbar"
+        aria-label={t.navAriaLabel}
+        className="pointer-events-auto inline-flex items-center gap-1 sm:gap-1.5 p-1.5 rounded-[18px] border border-white/12 bg-[rgba(34,40,31,0.88)] shadow-[0_12px_32px_rgba(10,14,8,0.45),inset_0_1px_rgba(255,255,255,0.08)] backdrop-blur-2xl transition-all duration-300 overflow-visible"
       >
         {/* Left Mark Tile */}
         <Link
           href="/"
-          aria-label="யாழ் — முகப்பு"
+          aria-label={t.navHomeAria}
           className="focus-ring grid size-9 shrink-0 place-items-center rounded-[12px] bg-white border border-white/20 shadow-sm transition-transform duration-200 hover:scale-105 overflow-hidden p-0.5"
         >
           <Image
             src="/yaazh-logo.png"
-            alt="யாழ் Logo"
+            alt={t.navLogoAlt}
             width={32}
             height={32}
             className="size-7 object-contain rounded-lg"
@@ -127,11 +130,14 @@ export function Navbar() {
                 style={active ? { color: "#23261f", fontWeight: 600 } : undefined}
                 className={active ? "!text-[#23261f] font-semibold" : ""}
               >
-                {item.label}
+                {t[item.labelKey]}
               </span>
             </Link>
           );
         })}
+
+        {/* Language Selector */}
+        <LanguageSelector />
       </nav>
     </div>
   );

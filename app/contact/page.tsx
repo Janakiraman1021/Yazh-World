@@ -1,8 +1,13 @@
+"use client";
+
 import { Mail, MessageCircle, Network, Sparkles, MapPin, Globe, Shield, Terminal, Code2 } from "lucide-react";
 import { ContactForm } from "../components/ContactForm";
 import { Reveal } from "../components/Reveal";
+import { useI18n } from "../i18n/context";
 
 export default function ContactPage() {
+  const { t } = useI18n();
+
   return (
     <>
       {/* Hero Header */}
@@ -11,13 +16,13 @@ export default function ContactPage() {
           <Reveal className="max-w-3xl">
             <div className="living-badge mb-4">
               <Sparkles className="size-3.5" />
-              நேரடி தொடர்பு • DIRECT CHANNEL
+              {t.contactBadge}
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light leading-tight text-white">
-              தொடர்பு <span className="text-[#a8e063] font-normal">கொள்ளுங்கள்</span>
+              {t.contactTitle1} <span className="text-[#a8e063] font-normal">{t.contactTitle2}</span>
             </h1>
             <p className="mt-5 text-base sm:text-lg leading-relaxed text-[#a4aaa0]">
-              யாழ் Web Platform, Chrome Extension, Computer Automation Desktop Agent, Developer API Hub மற்றும் நிறுவன கூட்டாண்மைக்கான நேரடித் தொடர்பு.
+              {t.contactDescription}
             </p>
           </Reveal>
         </div>
@@ -40,9 +45,9 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <span className="text-[10px] font-mono text-[#a8e063] uppercase tracking-wider">
-                      DIRECT INBOX
+                      {t.contactEmailTitle}
                     </span>
-                    <h2 className="text-xl font-medium text-white">மின்னஞ்சல்</h2>
+                    <h2 className="text-xl font-medium text-white">Email</h2>
                   </div>
                 </div>
 
@@ -53,13 +58,13 @@ export default function ContactPage() {
                   contact@yaazh.ai
                 </a>
                 <p className="mt-2 text-xs text-[#a4aaa0]">
-                  பொதுவாக 24 மணி நேரத்திற்குள் எங்கள் தொழில்நுட்பக் குழு உங்களுக்கு பதிலளிக்கும்.
+                  {t.contactEmailResponse}
                 </p>
 
                 <div className="mt-8 border-t border-[rgba(238,243,231,0.08)] pt-6">
                   <div className="flex items-center gap-3 text-xs text-[#a4aaa0]">
                     <MapPin className="size-4 text-[#a8e063] shrink-0" />
-                    <span>சென்னை • உலகளாவிய தமிழ் டெவலப்பர் சமூகம்</span>
+                    <span>{t.contactLocation}</span>
                   </div>
                 </div>
               </aside>
@@ -72,14 +77,14 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <span className="text-[10px] font-mono text-[#a8e063] uppercase tracking-wider">
-                      DEVELOPER & MCP SKILLS HUB
+                      {t.contactDeveloperTitle}
                     </span>
-                    <h2 className="text-xl font-medium text-white">டெவலப்பர் அணுகல்</h2>
+                    <h2 className="text-xl font-medium text-white">Developer</h2>
                   </div>
                 </div>
 
                 <p className="mt-4 text-xs leading-relaxed text-[#a4aaa0]">
-                  யாழ் API SDKs, Model Context Protocol (MCP) Skills மற்றும் Browser/Computer automation hooks மூலம் உங்கள் சொந்த பயன்பாடுகளில் தமிழ் குரல் வழிசெலுத்தலை இணைக்கலாம்.
+                  {t.contactDeveloperDescription}
                 </p>
 
                 <div className="mt-6 flex gap-3">

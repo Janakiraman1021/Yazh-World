@@ -2,6 +2,7 @@
 
 import { FormEvent, useMemo, useState } from "react";
 import { Send, CheckCircle2, Sparkles } from "lucide-react";
+import { useI18n } from "../i18n/context";
 
 type FormValues = {
   name: string;
@@ -22,6 +23,7 @@ const initialValues: FormValues = {
 };
 
 export function ContactForm() {
+  const { t } = useI18n();
   const [values, setValues] = useState<FormValues>(initialValues);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "success">("idle");
@@ -29,25 +31,25 @@ export function ContactForm() {
   const fields = useMemo(
     () =>
       [
-        { key: "name", label: "உங்கள் பெயர்", type: "text", placeholder: "எ.கா. கபிலன் செல்வன்" },
-        { key: "email", label: "மின்னஞ்சல் முகவரி", type: "email", placeholder: "kabilar@example.com" },
-        { key: "subject", label: "பொருள் / தலைப்பு", type: "text", placeholder: "எ.கா. யாழ் Extension முன்னோட்ட அணுகல்" },
+        { key: "name", label: t.formName, type: "text", placeholder: t.formNamePlaceholder },
+        { key: "email", label: t.formEmail, type: "email", placeholder: t.formEmailPlaceholder },
+        { key: "subject", label: t.formSubject, type: "text", placeholder: t.formSubjectPlaceholder },
       ] as const,
-    [],
+    [t],
   );
 
   function validate(nextValues: FormValues) {
     const nextErrors: FormErrors = {};
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!nextValues.name.trim()) nextErrors.name = "உங்கள் பெயரை உள்ளிடுங்கள்.";
+    if (!nextValues.name.trim()) nextErrors.name = t.formErrorName;
     if (!nextValues.email.trim()) {
-      nextErrors.email = "மின்னஞ்சலை உள்ளிடுங்கள்.";
+      nextErrors.email = t.formErrorEmail;
     } else if (!emailPattern.test(nextValues.email)) {
-      nextErrors.email = "சரியான மின்னஞ்சல் முகவரியை உள்ளிடுங்கள்.";
+      nextErrors.email = t.formErrorEmailInvalid;
     }
-    if (!nextValues.subject.trim()) nextErrors.subject = "பொருளை உள்ளிடுங்கள்.";
-    if (!nextValues.message.trim()) nextErrors.message = "உங்கள் செய்தியை உள்ளிடுங்கள்.";
+    if (!nextValues.subject.trim()) nextErrors.subject = t.formErrorSubject;
+    if (!nextValues.message.trim()) nextErrors.message = t.formErrorMessage;
 
     return nextErrors;
   }
@@ -72,7 +74,7 @@ export function ContactForm() {
       <div className="flex items-center gap-2 mb-6">
         <span className="living-badge">
           <Sparkles className="size-3" />
-          MESSAGE PORTAL
+          {t.formMessagePortal}
         </span>
       </div>
 
@@ -104,30 +106,30 @@ export function ContactForm() {
 
         <label className="sm:col-span-2">
           <span className="text-xs font-mono font-medium text-[#c6f19d] uppercase tracking-wider">
-            ஆர்வம் உள்ள தயாரிப்பு
+            {t.formProduct}
           </span>
           <select
             value={values.product}
             onChange={(event) => setValues((c) => ({ ...c, product: event.target.value }))}
             className="focus-ring mt-2 w-full rounded-xl border border-[rgba(238,243,231,0.12)] bg-[#23261f] px-4 py-3 text-sm text-white transition focus:border-[#a8e063] focus:bg-[#282b24]"
           >
-            <option value="general" className="bg-[#23261f] text-white">பொதுவான விசாரணை (General Inquiry)</option>
-            <option value="web" className="bg-[#23261f] text-white">01. யாழ் Web Platform (Tamil AI & 18+ Tools, LangLM)</option>
-            <option value="extension" className="bg-[#23261f] text-white">02. யாழ் Chrome Extension (Browser AI Agent, e-Sevai, Students)</option>
-            <option value="desktop" className="bg-[#23261f] text-white">03. யாழ் Computer Automation (Desktop AI Agent, Screen Vision)</option>
-            <option value="api" className="bg-[#23261f] text-white">Developer API Hub & MCP Skills Upload</option>
+            <option value="general" className="bg-[#23261f] text-white">{t.formProductGeneral}</option>
+            <option value="web" className="bg-[#23261f] text-white">{t.formProductWeb}</option>
+            <option value="extension" className="bg-[#23261f] text-white">{t.formProductExtension}</option>
+            <option value="desktop" className="bg-[#23261f] text-white">{t.formProductDesktop}</option>
+            <option value="api" className="bg-[#23261f] text-white">{t.formProductApi}</option>
           </select>
         </label>
 
         <label className="sm:col-span-2">
           <span className="text-xs font-mono font-medium text-[#c6f19d] uppercase tracking-wider">
-            செய்தி / வினவல்
+            {t.formMessage}
           </span>
           <textarea
             value={values.message}
             required
             rows={5}
-            placeholder="உங்கள் தேவைகள், சந்தேகங்கள் அல்லது கூட்டாண்மை விருப்பங்களை இங்கு பகிருங்கள்..."
+            placeholder={t.formMessagePlaceholder}
             aria-invalid={Boolean(errors.message)}
             aria-describedby={errors.message ? "message-error" : undefined}
             onChange={(event) =>
@@ -148,14 +150,14 @@ export function ContactForm() {
           type="submit"
           className="focus-ring inline-flex items-center gap-2 rounded-full bg-[#a8e063] px-8 py-3.5 text-sm font-semibold text-[#23261f] shadow-[0_12px_28px_rgba(168,224,99,0.25)] transition hover:bg-white hover:scale-105"
         >
-          செய்தி அனுப்புக
+          {t.formSubmit}
           <Send className="size-4" aria-hidden="true" />
         </button>
 
         {status === "success" && (
           <div className="flex items-center gap-2 text-xs font-medium text-[#c6f19d] bg-[#a8e063]/15 px-4 py-2 rounded-full border border-[#a8e063]/30">
             <CheckCircle2 className="size-4 text-[#a8e063]" />
-            <span>நன்றி! உங்கள் செய்தி வெற்றிகரமாக பெறப்பட்டது. விரைவில் பதிலளிக்கிறோம்.</span>
+            <span>{t.formSuccess}</span>
           </div>
         )}
       </div>

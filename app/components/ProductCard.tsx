@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRight, CheckCircle, Download, Sparkles } from "lucide-react";
+import { useI18n } from "../i18n/context";
 
 type ProductCardProps = {
   id?: string;
@@ -30,10 +33,14 @@ export function ProductCard({
   tools,
   href = "/contact",
   downloadUrl,
-  downloadLabel = "பதிவிறக்குக",
-  badge = "பதிவிறக்கம் தயார்",
+  downloadLabel,
+  badge,
   edition = "EDITION",
 }: ProductCardProps) {
+  const { t } = useI18n();
+  const resolvedDownloadLabel = downloadLabel || t.productCardDownload;
+  const resolvedBadge = badge || t.productCardBadge;
+
   return (
     <article
       id={id}
@@ -50,7 +57,7 @@ export function ProductCard({
               {edition}
             </span>
             <span className="living-badge text-[10px]">
-              {badge}
+              {resolvedBadge}
             </span>
           </div>
 
@@ -89,18 +96,18 @@ export function ProductCard({
 
           {tools && tools.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-1.5">
-              {tools.slice(0, 6).map((t) => (
+              {tools.slice(0, 6).map((toolName) => (
                 <span
-                  key={t}
+                  key={toolName}
                   className="inline-flex items-center gap-1 rounded-md bg-[rgba(238,243,231,0.05)] border border-[rgba(238,243,231,0.08)] px-2 py-0.5 text-[11px] text-[#f2f3ef]/80 hover:border-[#a8e063]/30 hover:bg-[#a8e063]/10 transition-colors"
                 >
                   <Sparkles className="size-2 text-[#a8e063]" />
-                  {t}
+                  {toolName}
                 </span>
               ))}
               {tools.length > 6 && (
                 <span className="rounded-md bg-[rgba(168,224,99,0.1)] border border-[#a8e063]/20 px-2 py-0.5 text-[11px] text-[#a8e063]">
-                  +{tools.length - 6} கூடுதல்
+                  +{tools.length - 6} {t.productCardMore}
                 </span>
               )}
             </div>
@@ -126,13 +133,13 @@ export function ProductCard({
               className="focus-ring inline-flex items-center gap-2 rounded-full bg-[#a8e063] px-6 py-2.5 text-xs sm:text-sm font-semibold text-[#23261f] shadow-[0_6px_20px_rgba(168,224,99,0.35)] transition-all duration-200 hover:bg-[#c6f19d] hover:scale-105"
             >
               <Download className="size-4" aria-hidden="true" />
-              <span>{downloadLabel}</span>
+              <span>{resolvedDownloadLabel}</span>
             </a>
             <Link
               href={href}
               className="focus-ring inline-flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-4 py-2 text-xs font-medium text-[#f2f3ef]/80 hover:text-white hover:bg-white/10 transition"
             >
-              <span>விவரங்கள்</span>
+              <span>{t.productCardDetails}</span>
               <ArrowRight className="size-3" aria-hidden="true" />
             </Link>
           </div>
@@ -141,7 +148,7 @@ export function ProductCard({
             href={href}
             className="focus-ring inline-flex items-center gap-2 rounded-full bg-[rgba(168,224,99,0.15)] border border-[#a8e063]/30 px-5 py-2.5 text-xs sm:text-sm font-semibold text-[#c6f19d] transition hover:bg-[#a8e063] hover:text-[#23261f] hover:gap-3"
           >
-            <span>முழு விவரங்கள் காண்க</span>
+            <span>{t.productCardFullDetails}</span>
             <ArrowRight className="size-3.5" aria-hidden="true" />
           </Link>
         )}

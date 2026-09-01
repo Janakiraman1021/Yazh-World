@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ArrowRight, CheckCircle, Download, Sparkles } from "lucide-react";
+import { useI18n } from "../i18n/context";
 
 type ProductSplitProps = {
   index: string;
@@ -30,11 +31,13 @@ export function ProductSplit({
   icon,
   href = "/contact",
   downloadUrl,
-  downloadLabel = "பதிவிறக்குக",
+  downloadLabel,
   badge,
   edition,
   reverse = false,
 }: ProductSplitProps) {
+  const { t } = useI18n();
+  const resolvedDownloadLabel = downloadLabel || t.productSplitDownload;
   const numberBlock = (
     <div className="relative flex items-center justify-center select-none py-6 lg:py-0">
       <span
@@ -82,7 +85,7 @@ export function ProductSplit({
       {toolsOrHighlights && toolsOrHighlights.length > 0 && (
         <div className="mt-1">
           <span className="block text-[11px] font-mono font-medium tracking-wider text-[#a8e063] uppercase mb-2">
-            சிறப்பு கருவிகள் & திறன்கள்:
+            {t.productSplitTools}
           </span>
           <div className="flex flex-wrap gap-1.5">
             {toolsOrHighlights.map((tool) => (
@@ -150,7 +153,7 @@ export function ProductSplit({
               href={href}
               className="focus-ring inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-5 py-3 text-xs sm:text-sm font-medium text-[#f2f3ef]/80 hover:bg-white/10 hover:text-white transition"
             >
-              <span>விவரங்கள் அறிய</span>
+              <span>{t.productSplitDetails}</span>
               <ArrowRight className="size-3.5" aria-hidden="true" />
             </Link>
           </>
@@ -159,7 +162,7 @@ export function ProductSplit({
             href={href}
             className="focus-ring inline-flex items-center gap-2 rounded-full bg-[#a8e063] px-6 py-3 text-xs sm:text-sm font-semibold text-[#23261f] shadow-[0_6px_20px_rgba(168,224,99,0.25)] transition hover:bg-[#c6f19d] hover:scale-105"
           >
-            <span>முன்னோட்ட அணுகல் பெறுக</span>
+            <span>{t.productSplitPreview}</span>
             <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
         )}

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState, useMemo, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useI18n } from "../../i18n/context";
 import "./styles.css";
 
 export const SYLVA_HERO_VARIANTS = ["living-green", "sakura-sunset", "maple-autumn", "sequoia-mist"] as const;
@@ -39,8 +40,30 @@ export function SylvaHero({
   bodySize = 16.5,
   headingLetterSpacing = -0.006,
 }: SylvaHeroProps) {
+  const { locale } = useI18n();
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    if (ready && frameRef.current && frameRef.current.contentWindow) {
+      try {
+        frameRef.current.contentWindow.postMessage({ type: "YAAZH_SET_LOCALE", locale }, "*");
+      } catch {
+        // ignore
+      }
+    }
+  }, [locale, ready]);
+
+  function handleFrameLoad() {
+    setReady(true);
+    if (frameRef.current && frameRef.current.contentWindow) {
+      try {
+        frameRef.current.contentWindow.postMessage({ type: "YAAZH_SET_LOCALE", locale }, "*");
+      } catch {
+        // ignore
+      }
+    }
+  }
 
   return (
     <div
@@ -58,13 +81,11 @@ export function SylvaHero({
     >
       <iframe
         ref={frameRef}
-        title="யாழ் — Into the living world"
+        title="Yaazh - Into the living world"
         src={SYLVA_HERO_BASE_URL}
         sandbox={URL_FRAME_SANDBOX}
         loading="eager"
-        onLoad={() => {
-          setReady(true);
-        }}
+        onLoad={handleFrameLoad}
         style={{
           position: "absolute",
           inset: 0,

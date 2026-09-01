@@ -52,7 +52,7 @@ export function BestsellersBookShowcase({
     >
       <iframe
         ref={frameRef}
-        title="யாழ் — தயாரிப்புகள் அரங்கம் • Living World Showcase"
+        title="Yaazh — Products Showcase • Living World Showcase"
         src={BESTSELLERS_BASE_URL}
         sandbox={URL_FRAME_SANDBOX}
         loading="eager"
