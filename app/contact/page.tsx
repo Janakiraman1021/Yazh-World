@@ -52,10 +52,10 @@ export default function ContactPage() {
                 </div>
 
                 <a
-                  href="mailto:contact@yaazh.ai"
+                  href="mailto:yazh@nanotom.in"
                   className="focus-ring mt-4 inline-block text-lg font-medium text-[#c6f19d] hover:text-white transition"
                 >
-                  contact@yaazh.ai
+                  yazh@nanotom.in
                 </a>
                 <p className="mt-2 text-xs text-[#a4aaa0]">
                   {t.contactEmailResponse}
