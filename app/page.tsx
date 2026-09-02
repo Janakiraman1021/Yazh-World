@@ -80,7 +80,7 @@ export default function Home() {
       tools: t.desktopTools,
       icon: <Laptop className="size-7" aria-hidden="true" />,
       href: "/products#desktop",
-      downloadUrl: "/EXE/TamilComputerAgent.exe",
+      downloadUrl: "/EXE/Yaazh.exe",
       downloadLabel: t.productCardDownload,
       edition: t.desktopEdition,
       badge: t.desktopBadge,

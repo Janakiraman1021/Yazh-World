@@ -16,7 +16,7 @@ export default function ProductsPage() {
     ...p,
     logoSrc: "/yaazh-logo.png",
     href: `/contact?product=${["web", "extension", "desktop"][i]}`,
-    downloadUrl: i === 1 ? "/EXE/yazh-ai.crx" : i === 2 ? "/EXE/TamilComputerAgent.exe" : undefined,
+    downloadUrl: i === 1 ? "/EXE/yazh-ai.crx" : i === 2 ? "/EXE/Yaazh.exe" : undefined,
     tools: p.toolsOrHighlights,
   }));
 
@@ -162,8 +162,8 @@ export default function ProductsPage() {
                 Chrome Extension (.CRX)
               </a>
               <a
-                href="/EXE/TamilComputerAgent.exe"
-                download="TamilComputerAgent.exe"
+                href="/EXE/Yaazh.exe"
+                download="Yaazh.exe"
                 className="focus-ring inline-flex items-center gap-2 rounded-full border border-[#a8e063]/40 bg-[rgba(168,224,99,0.1)] px-8 py-3.5 text-sm font-semibold text-[#c6f19d] transition hover:bg-[#a8e063] hover:text-[#23261f]"
               >
                 Desktop Agent (.EXE)
