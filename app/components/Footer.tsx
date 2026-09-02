@@ -13,8 +13,11 @@ export function Footer() {
     { href: "/", label: t.navHome },
     { href: "/products", label: t.navProducts },
     { href: "/why-yaazh", label: t.navWhyYaazh },
+    { href: "/docs", label: t.navDocs },
     { href: "/about", label: t.navAbout },
     { href: "/contact", label: t.navGetStarted },
+    { href: "/privacy", label: t.navPrivacy },
+    { href: "/terms", label: t.navTerms },
   ];
 
   return (

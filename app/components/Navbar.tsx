@@ -9,7 +9,7 @@ import { LanguageSelector } from "./LanguageSelector";
 
 type NavItem = {
   href: string;
-  labelKey: "navHome" | "navProducts" | "navWhyYaazh" | "navAbout" | "navGetStarted";
+  labelKey: "navHome" | "navProducts" | "navWhyYaazh" | "navDocs" | "navAbout" | "navGetStarted";
   isEnter?: boolean;
   icon: ReactNode;
 };
@@ -44,6 +44,16 @@ const navItems: NavItem[] = [
         <path d="M4 2.4h5.3L12 5.1v8.5H4z" />
         <path d="M9.2 2.4V5h2.7" />
         <path d="M6 8.4h4M6 10.8h2.8" />
+      </svg>
+    ),
+  },
+  {
+    href: "/docs",
+    labelKey: "navDocs",
+    icon: (
+      <svg viewBox="0 0 16 16" className="size-3.5 fill-none stroke-current stroke-[1.3] stroke-linecap-round stroke-linejoin-round" aria-hidden="true">
+        <path d="M2 3h9a2 2 0 0 1 2 2v8.5a.5.5 0 0 1-.75.43L9.5 12.5H2a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1z" />
+        <path d="M4 6h5M4 8.5h3" />
       </svg>
     ),
   },

@@ -30,8 +30,11 @@ export type TranslationKeys = {
   navHome: string;
   navProducts: string;
   navWhyYaazh: string;
+  navDocs: string;
   navAbout: string;
   navGetStarted: string;
+  navPrivacy: string;
+  navTerms: string;
   navAriaLabel: string;
   navHomeAria: string;
   navLogoAlt: string;
